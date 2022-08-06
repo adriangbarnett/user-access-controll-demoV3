@@ -1,0 +1,28 @@
+<%- include('./partials/head.ejs') %>
+<link href="/css/flashalert.css" rel="stylesheet">
+<h1>LOGIN</h1>
+<form action="/login" method="post">
+    <input type="text" id="username" name="username" placeholder="Username" value="a" autofocus>
+    <input type="password" id="password" name="password" placeholder="Password" value = "a" >
+    <button type="submit"class="btn btn-primary">Login</button>
+</form>
+
+<div class="links">
+    <a href="/register">Register</a><span>   |   </span>
+    <a href="/resetpwd" class="reset">Reset password</a>
+</div>
+
+<% if (error) { %>
+    <div id="divAlert1" style="color: brown;" class="alert alert-danger">
+        <p>Incorrect username or password</p>
+        <button type="button" id="closeFlashAlertBtn1" data-dismiss="alert" aria-label="Close" onclick="hideFlashAlert()">x</button>
+    </div>
+<% } %>
+<% if (resetpwd) { %>
+    <div id="divAlert1" style="color: rgb(17, 84, 218);" class="alert alert-info">
+        <p>Reset password link sent to your email... NOT</p>
+        <button type="button" id="closeFlashAlertBtn1" data-dismiss="alert" aria-label="Close" onclick="hideFlashAlert()">x</button>
+    </div>
+<% } %>
+
+<script language="JavaScript" type="text/javascript" src="/js/register.js"></script>

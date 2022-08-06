@@ -1,0 +1,68 @@
+<%- include('./partials/head.ejs') %>
+<link href="/css/flashalert.css" rel="stylesheet">
+
+<h1>CREATE USER</h1>
+
+<div class="links">
+  <a href="/dashboard">Back</a>
+</div>
+
+<div >
+  <h2>Roles</h2>
+
+  <form action="/admin/user_admin_create_post" method="post" autofocus autocomplete="off"> 
+    <input type="text" id="username" name="username" placeholder="Username" value="<%= username %>" autofocus>
+    <input type="text" id="email" name="email" placeholder="Email" value = "<%= email %>">
+    <input type="password" id="password" name="password" placeholder="Password" value = "" >
+  
+    <div id="rolesList">
+      <% for(r=0; r!=roles.length; r++) { %>
+  
+        <%  if (roles[r].name === "system" && currentUser.roles.includes("system") === true ) { %>
+          <label><%= roles[r].name %></label>
+          <input type="checkbox" id="role.<%=roles[r].name%>" name="role.<%=roles[r].name%>"><br/>
+        <% } %>
+    
+        <%  if (roles[r].name === "system" && currentUser.roles.includes("system") !== true ) { %>
+            <label><%= roles[r].name %></label>
+            <input type="checkbox" id="role.<%=roles[r].name%>" name="role.<%=roles[r].name%>" disabled><br/>
+        <% } %>
+  
+        <%  if (roles[r].name === "user") { %>
+          <label><%= roles[r].name %></label>
+          <input type="checkbox" id="role.<%=roles[r].name%>" name="role.<%=roles[r].name%>" checked><br/>
+        <% } %>
+    
+        <%  if (roles[r].name !== "system" && roles[r].name !== "user") { %>
+          <label><%= roles[r].name %></label>
+          <input type="checkbox" id="role.<%=roles[r].name%>" name="role.<%=roles[r].name%>"><br/>
+        <% } %>
+      <% } %>
+    </div>
+
+    <br/>
+    
+    <a href="/dashboard" class="btn btn-danger">Cancel</a>
+    <button type="submit" class="btn btn-success">Save</button>
+  </form>
+</div>
+  
+<div id="messages">
+   <% if(message) { %>
+    <div id="divAlert1" style="color: brown;" class="alert alert-danger">
+        <p><strong>ERROR</strong></p>
+        <p><%=message%></p>
+          <% if(errList) { %>
+            <% if(errList.length != 0) { %>
+              <% for(let i=0; i != errList.length; i++) { %>
+                <p style="line-height: 0.3;">* <%=errList[i]%></p>
+              <% } %>
+            <% } %>
+          <% } %>
+          <button type="button" id="closeFlashAlertBtn1" data-dismiss="alert" aria-label="Close" class="closeFlashAlertBtn" onclick="hideFlashAlert()">x</button>
+    </div>
+  <% } %>
+</div>  
+ 
+<script language="JavaScript" type="text/javascript" src="/js/register.js"></script>
+

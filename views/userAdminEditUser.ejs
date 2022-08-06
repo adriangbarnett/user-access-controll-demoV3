@@ -1,0 +1,100 @@
+<%- include('./partials/head.ejs') %>
+<link href="/css/flashalert.css" rel="stylesheet">
+
+<h1>UPDATE USER</h1>
+<div class="links">
+  <a href="/admin/user_admin_list_get">Back</a>
+  <a href="/dashboard">Dashboard</a>
+</div>
+
+<div>
+
+  <form action="/admin/user_admin_update_post" method="post" autofocus autocomplete="off"> 
+    <input type="text" id="username" name="username" placeholder="Username" value="<%= user.username %>" autofocus>
+    <input type="text" id="email" name="email" placeholder="Email" value = "<%= user.email %>">
+    <input id="id>" type="text" name="id" value="<%=user.id%>"/>
+    <!-- <input type="password" id="password" name="password" placeholder="Password" value = "" > -->
+  
+    <br/><br/><br/>
+    <h2>Roles</h2>
+    <% for(r=0; r!=roles.length; r++) { %>
+    
+      <% var lock = true %>
+      <% if (roles[r].name === "system" && currentUser.roles.includes("system") === true ) { %> 
+      
+      <% } %>
+  
+      <% if (roles[r].name === "system" && currentUser.roles.includes("system") === false ) {  %>
+      <% } %>
+  
+  
+      <%  if (roles[r].name === "system" && currentUser.roles.includes("system") === true ) { %>
+        <% if (user.roles.includes(roles[r].name) === true) { %>
+          <label><%= roles[r].name %></label>
+          <input type="checkbox" id="role.<%=roles[r].name%>" name="role.<%=roles[r].name%>" checked="checked" ><br/>
+        <% } %>
+        <% if (user.roles.includes(roles[r].name) === false) { %>
+          <label><%= roles[r].name %></label>
+          <input type="checkbox" id="role.<%=roles[r].name%>" name="role.<%=roles[r].name%>"><br/>
+        <% } %>
+      <% } %>
+  
+      <%  if (roles[r].name === "system" && currentUser.roles.includes("system") !== true ) { %>
+        <% if (user.roles.includes(roles[r].name) === true) { %>
+          <label><%= roles[r].name %></label>
+          <input type="checkbox" id="role.<%=roles[r].name%>" name="role.<%=roles[r].name%>" checked="checked" disabled ><br/>
+        <% } %>
+        <% if (user.roles.includes(roles[r].name) === false) { %>
+          <label><%= roles[r].name %></label>
+          <input type="checkbox" id="role.<%=roles[r].name%>" name="role.<%=roles[r].name%>" disabled><br/>
+        <% } %>
+      <% } %>
+  
+      <%  if (roles[r].name !== "system") { %>
+        <% if (user.roles.includes(roles[r].name) === true) { %>
+          <label><%= roles[r].name %></label>
+          <input type="checkbox" id="role.<%=roles[r].name%>" name="role.<%=roles[r].name%>" checked="checked"><br/>
+        <% } %>
+        <% if (user.roles.includes(roles[r].name) === false) { %>
+          <label><%= roles[r].name %></label>
+          <input type="checkbox" id="role.<%=roles[r].name%>" name="role.<%=roles[r].name%>"><br/>
+        <% } %>
+      <% } %>
+  
+    <% } %>
+    <br/>
+    <a href="/admin/user_admin_list_get" class="btn btn-danger">Cancel</a>
+    <button type="submit" class="btn btn-success">Save</button>
+
+  </form>
+
+</div>
+
+<!-- errors -->
+<div id="messages">
+
+  <% if(returnData.message) { %>
+
+    <% if(returnData.code === 200) { heading="Success"; className="alert alert-success"; textColor="brown"} %>
+    <% if(returnData.code !== 200) { heading="ERROR"; className="alert alert-danger"; textColor="green"} %>
+
+    <div id="divAlert1" class="<%= className %>">
+        <p><strong><%= heading %></strong></p>
+        <p><%=returnData.message%></p>
+          <% if(returnData.errList) { %>
+            <% if(returnData.errList.length != 0) { %>
+              <% for(let i=0; i != returnData.errList.length; i++) { %>
+                <p style="line-height: 0.3;">* <%=returnData.errList[i]%></p>
+              <% } %>
+            <% } %>
+          <% } %>
+        <button type="button" id="closeFlashAlertBtn1" data-dismiss="alert" aria-label="Close" class="closeFlashAlertBtn" onclick="hideFlashAlert()">x</button>
+    </div>
+  <% } %>
+
+</div>
+
+
+
+<script language="JavaScript" type="text/javascript" src="/js/register.js"></script>
+

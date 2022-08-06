@@ -1,0 +1,37 @@
+<link href="/css/flashalert.css" rel="stylesheet">
+<h1>REGISTER</h1>
+<form action="/register" method="post" autofocus autocomplete="off"> 
+  <input type="text" id="username" name="username" placeholder="Username" value="<%= username %>" autofocus>
+  <input type="text" id="email" name="email" placeholder="Email" value = "<%= email %>">
+  <input type="password" id="password" name="password" placeholder="Password" value = "" >
+  <button type="submit">Register</button>
+</form>
+
+<div class="links">
+  <a href="/login">Login</a><span>   |   </span>
+  <a href="/resetpwd" class="reset">Reset password</a>
+</div>
+
+<!-- error -->
+<%- include('./partials/head.ejs') %>
+<% if(message) { %>
+  <div id="divAlert1" style="color: brown;" class="alert alert-danger">
+      <p><strong>ERROR</strong></p>
+      <p><%=message%></p>
+        <% if(errList) { %>
+          <% if(errList.length != 0) { %>
+            <% for(let i=0; i != errList.length; i++) { %>
+              <p style="line-height: 0.3;">* <%=errList[i]%></p>
+            <% } %>
+          <% } %>
+        <% } %>
+        <button type="button" id="closeFlashAlertBtn1" data-dismiss="alert" aria-label="Close" class="closeFlashAlertBtn" onclick="hideFlashAlert()">x</button>
+  </div>
+  <% } %>
+
+
+  <script language="JavaScript" type="text/javascript" src="/js/register.js"></script>
+
+
+
+

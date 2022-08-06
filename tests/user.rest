@@ -1,0 +1,35 @@
+### CREATE
+POST http://localhost:3000/api/post_user
+Content-Type: application/json
+
+{
+    "username": "a",
+    "password": "a",
+    "email": "a@a.com",
+    "roles": ["user","user_admin"]
+}
+### GET BY ID
+GET http://localhost:3000/api/get_user_byId?id=62ee8f1b0b34a79c0c236f4f
+
+### Get all
+GET http://localhost:3000/api/get_users_all
+
+### Update one byid
+PATCH http://localhost:3000/api/patch_user_byId?id=62ee8f1b0b34a79c0c236f4f
+Content-Type: application/json
+
+{
+    "username": "xx",
+    "password": "xx",
+    "email": "xx@xx.com",
+    "roles": ["user","user_admin"]
+}
+
+
+### DELETE BY ID
+DELETE http://localhost:3000/api/delete_user_byId?id=62ea60e01aa3e65626b47195
+
+### DELETE All
+DELETE http://localhost:3000/api/delete_users_all
+
+

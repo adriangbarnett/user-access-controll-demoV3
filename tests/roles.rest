@@ -1,0 +1,68 @@
+### Create user with [system] role
+POST http://localhost:3000/api/post_user
+Content-Type: application/json
+
+{
+    "username": "a",
+    "password": "a",
+    "email": "a@a.com",
+    "roles": ["system"]
+}
+
+### Create user with [user] role
+POST http://localhost:3000/api/post_user
+Content-Type: application/json
+
+{
+    "username": "b",
+    "password": "b",
+    "email": "b@b.com",
+    "roles": ["user"]
+}
+
+### Create user with [user] and [user_admin] role
+POST http://localhost:3000/api/post_user
+Content-Type: application/json
+
+{
+    "username": "c",
+    "password": "c",
+    "email": "c@c.com",
+    "roles": ["user", "user_admin"]
+}
+
+### Create user with [project_admin] role
+POST http://localhost:3000/api/post_user
+Content-Type: application/json
+
+{
+    "username": "d",
+    "password": "d",
+    "email": "d@d.com",
+    "roles": ["user", "project_admin"]
+}
+
+### Create user with [project_item_admin] role
+POST http://localhost:3000/api/post_user
+Content-Type: application/json
+
+{
+    "username": "e",
+    "password": "e",
+    "email": "e@e.com",
+    "roles": ["user", "project_item_admin"]
+}
+
+### Create user with all roles
+POST http://localhost:3000/api/post_user
+Content-Type: application/json
+
+{
+    "username": "f",
+    "password": "f",
+    "email": "b@b.com",
+    "roles": ["user", "user_admin","project_admin","project_item_admin"]
+}
+
+### DELETE All
+DELETE http://localhost:3000/api/delete_users_all

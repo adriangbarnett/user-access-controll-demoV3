@@ -1,0 +1,14 @@
+<%- include('./partials/head.ejs') %>
+<link href="/css/flashalert.css" rel="stylesheet">
+<h1>Dashboard</h1>
+<h2>USERNAME: <%= user.username %></h2>
+<h2>EMAIL: <%= user.email %></h2>
+<h2>ROLE: <%= user.roles %></h2>
+<form action="/logout?_method=DELETE" method="POST">
+    <input type="submit" value="Logout" class="btn btn-danger">
+</form>
+
+<H1>USER ADMIN FUNCTIONS</H1>
+<a href="/admin/user_admin_create_get" class="btn btn-light">Create user</a>
+<a href="/admin/user_admin_list_get" class="btn btn-light">List users</a>
+
