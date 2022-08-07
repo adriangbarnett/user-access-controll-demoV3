@@ -1,21 +1,22 @@
 /* Flash alert button */
 
 .closeFlashAlertBtn {
-    line-height: 12px;
-    width: 18px;
-    font-size: 12pt;
-    font-family: tahoma;
-    margin-top: 10px;
-    margin-right: 10px;
-    position:absolute;
-    top:0;
-    right:0;
-    border: none;
-    background-color: transparent;
-}
-.closeFlashAlertBtn:hover {
-  color: red;
+  line-height: 12px;
+  width: 18px;
+  font-size: 12pt;
+  font-family: tahoma;
+  margin-top: 10px;
+  margin-right: 10px;
+  position:absolute;
+  top:0;
+  right:0;
   border: none;
+  background-color: transparent;
+}
+
+.closeFlashAlertBtn:hover {
+color: red;
+border: none;
 }
 
 

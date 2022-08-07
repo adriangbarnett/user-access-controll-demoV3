@@ -1,28 +1,69 @@
-<%- include('./partials/head.ejs') %>
-<link href="/css/flashalert.css" rel="stylesheet">
-<h1>LOGIN</h1>
-<form action="/login" method="post">
-    <input type="text" id="username" name="username" placeholder="Username" value="a" autofocus>
-    <input type="password" id="password" name="password" placeholder="Password" value = "a" >
-    <button type="submit"class="btn btn-primary">Login</button>
-</form>
 
-<div class="links">
-    <a href="/register">Register</a><span>   |   </span>
-    <a href="/resetpwd" class="reset">Reset password</a>
-</div>
+<html>
 
-<% if (error) { %>
-    <div id="divAlert1" style="color: brown;" class="alert alert-danger">
-        <p>Incorrect username or password</p>
-        <button type="button" id="closeFlashAlertBtn1" data-dismiss="alert" aria-label="Close" onclick="hideFlashAlert()">x</button>
-    </div>
-<% } %>
-<% if (resetpwd) { %>
-    <div id="divAlert1" style="color: rgb(17, 84, 218);" class="alert alert-info">
-        <p>Reset password link sent to your email... NOT</p>
-        <button type="button" id="closeFlashAlertBtn1" data-dismiss="alert" aria-label="Close" onclick="hideFlashAlert()">x</button>
-    </div>
-<% } %>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Demo sign up web page">
+        <meta name="author" content="Adrian Barnett">
+        <meta name="generator" content="Hugo 0.79.0">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/css/login.css">
+        <link rel="stylesheet" type="text/css" href="/css/userlist.css">
+        <link rel="stylesheet" type="text/css" href="/css/flashalert.css">
+        <title>Login</title>
+    </head>
+    
 
-<script language="JavaScript" type="text/javascript" src="/js/register.js"></script>
+    <body class="text-center">
+        <main class="form-signin">
+    
+            <form action="/login" method="post" autofocus autocomplete="off">
+                <img class="mb-4" src="images/user.png" alt="" width="80" height="85">
+                <h1 class="h3 mb-3 fw-normal">Login</h1>
+                <input type="text" class="form-control top" id="username" name="username" placeholder="Username" value="" autofocus autocomplete="off">
+                <input type="password" class="form-control bottom" id="password" name="password" placeholder="Password" value = "" autocomplete="off">
+                <i class="bi bi-eye-slash eye" id="togglePassword" title="Toggle show password" onclick="showHidePassword()"></i>
+                <button class="w-100 btn btn-lg btn-primary" type="submit">Login</button>
+            </form>
+    
+            <div class="links">
+                <a href="/register">Register</a><span>   |   </span>
+                <a href="/resetpwd" class="reset">Reset password</a>
+            </div>
+            
+            <!-- error -->
+            <div id="divAlert" class="text-left divAlert">
+                <% if (error) {%>
+                    <div class="alert alert-danger">  
+                        <strong style="line-height: 0.6;">Error</strong>
+                        <p>Incorrect username or password 1</p>
+                        <button type="button" id="closeFlashAlertBtn" class="closeFlashAlertBtn" data-dismiss="alert" aria-label="Close" title="Close" onclick="hideFlashAlert()">x</button>
+                    </div>
+                <% } %>
+                <% if (resetpwd) {%>
+                    <div class="alert alert-danger">  
+                        <p>Reset password link sent to your email... NOT</p>
+                        <button type="button" id="closeFlashAlertBtn" class="closeFlashAlertBtn" data-dismiss="alert" aria-label="Close" title="Close" onclick="hideFlashAlert()">x</button>
+                    </div>
+                <% } %>
+            </div>
+
+        </main>
+    </body>
+
+    <script language="JavaScript" type="text/javascript" src="/js/main.js"></script>
+ 
+</html>
+
+
+
+
+
+
+
+
+  
+    
+ 

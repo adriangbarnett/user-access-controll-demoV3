@@ -6,7 +6,6 @@ passportController = require("../controllers/passport.js");
 
 //
 router.get("/", passportController.isNotAuth, (req, res) => {
-    console.log("Nav: /");
     return res.redirect("/login");
 })
 
@@ -37,8 +36,7 @@ router.post("/resetpwd", passportController.isNotAuth, (req, res) => {
 
 // Register
 router.get("/register", passportController.isNotAuth, (req, res) => {
-    console.log("Nav: register");
-    return res.render("register", {username: "", password: "", email: "", message: "", error: ""});
+    return res.render("register", {username: "", password: "", email: "", password: "", message: "", error: ""});
 })
 
 

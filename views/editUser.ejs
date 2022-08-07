@@ -4,13 +4,13 @@
 
 <h1>UPDATE USER</h1>
 <div class="links">
-  <a href="/admin/user_admin_list_get">Back</a>
+  <a href="/admin/userList">Back</a>
   <a href="/dashboard">Dashboard</a>
 </div>
 
 <div>
 
-  <form action="/admin/user_admin_update_post" method="post" autofocus autocomplete="off"> 
+  <form action="/admin/updateUser" method="post" autofocus autocomplete="off"> 
     <input type="text" id="username" name="username" placeholder="Username" value="<%= user.username %>" autofocus>
     <input type="text" id="email" name="email" placeholder="Email" value = "<%= user.email %>">
     <input id="id>" type="text" name="id" value="<%=user.id%>"/>
@@ -61,7 +61,7 @@
   
     <% } %>
     <br/>
-    <a href="/admin/user_admin_list_get" class="btn btn-danger">Cancel</a>
+    <a href="/admin/userList" class="btn btn-danger">Cancel</a>
     <button type="submit" class="btn btn-success">Save</button>
 
   </form>

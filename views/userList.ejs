@@ -1,0 +1,94 @@
+<html>
+    <head>
+        <title>User List</title>
+        <meta charset="utf-8">
+        <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
+        <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round"> -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+        <!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> -->
+        <!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script> -->
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+        <link href="/css/userlist.css" rel="stylesheet">
+    </head>
+
+    <body>
+
+        <div class="container-x1">
+            <div class="table-responsive">
+                <div class="table-wrapper">
+                    <div class="table-title">
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <h2>User <b>Management</b></h2>
+                            </div>
+                            <div class="col-sm-7">
+                                <a href="/admin/createUser" class="btn btn-secondary"><i class="material-icons">&#xE147;</i> <span>Add New User</span></a>
+                                <a href="/dashboard" class="btn btn-secondary"><i class="material-icons">&#xe5e0;</i> <span>Back</span></a>						
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- table -->
+                    <table class="table table-striped table-hover">
+                        <tr>
+                            <thead>
+                                <th>#</th>
+                                <th>Username</th>
+                                <th>Email</th>
+                                <th>Created</th>
+                                <th>Updated</th>
+                                <th>Status</th>
+                                <th>Roles</th>
+                                <th></th>
+                                <th>Actions</th>
+                            </thead>
+                        </tr>
+                        <tbody>
+                            <% if (list !== null) { %>
+                        
+                                <% for(i=0; i != list.length; i++) { %>
+                                    <tr>
+                                        <th><%= i+1 %></th>
+                                        <th><%= list[i].username %></th>
+                                        <th><%= list[i].email %></th>
+                                        <th><%= list[i].createdOn.toLocaleString(undefined, {year: 'numeric', month: '2-digit', day: '2-digit', weekday:"short", hour: '2-digit', hour12: false, minute:'2-digit', second:'2-digit'}) %></th>
+                                        <th><%= list[i].updatedOn.toLocaleString(undefined, {year: 'numeric', month: '2-digit', day: '2-digit', weekday:"short", hour: '2-digit', hour12: false, minute:'2-digit', second:'2-digit'})%></th>
+                                        <td><span class="status text-success">&bull;</span> <%= list[i].status %></td>
+                                        <th><%= list[i].roles %></th>
+                                        <th>
+                                            <td>
+                                                <a href="/admin/editUser?id=<%=list[i]._id%>" class="settings" title="Edit user" data-toggle="tooltip"><i class="material-icons">&#xE8B8;</i></a>
+                                                <a href="/admin/deleteUser?id=<%=list[i]._id%>" class="delete" title="Delete user, no undo!" data-toggle="tooltip"><i class="material-icons">&#xE5C9;</i></a>
+                                            </td>
+                                        </th>
+                                    </tr>
+                            
+                                <% } %>
+                            
+                            <%  } %>
+                        </tbody>
+                    </table>
+
+                    <!-- nav TODO -->
+                    <!-- <div class="clearfix">
+                        <div class="hint-text">Showing <b>X</b> out of <b>Y</b> entries</div>
+                        <ul class="pagination">
+                            <li class="page-item disabled"><a href="#">Previous</a></li>
+                            <li class="page-item"><a href="#" class="page-link">1</a></li>
+                            <li class="page-item"><a href="#" class="page-link">2</a></li>
+                            <li class="page-item active"><a href="#" class="page-link">3</a></li>
+                            <li class="page-item"><a href="#" class="page-link">4</a></li>
+                            <li class="page-item"><a href="#" class="page-link">5</a></li>
+                            <li class="page-item"><a href="#" class="page-link">Next</a></li>
+                        </ul>
+                    </div> -->
+
+                </div>
+            </div>
+        </div> 
+
+    </body>
+
+</html>

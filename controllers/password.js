@@ -60,23 +60,23 @@ const validatePasswordInput = async (plainTextPassword) => {
 
     if (plainTextPassword == null) { errorList.push("Password must not be empty"); }
     if (plainTextPassword.length  == 0) { errorList.push("Password must not be empty"); }
-    if (plainTextPassword.length < app.locals.minPasswordLen) { errorList.push(`"Min password length is ${app.locals.minPasswordLen} chars, Max password length is ${app.locals.maxPasswordLen} chars`); }
-    if (plainTextPassword.length > app.locals.maxPasswordLen) { errorList.push(`Min password length is ${app.locals.minPasswordLen}  chars, Max password length is ${app.locals.maxPasswordLen} chars`); }
+    if (plainTextPassword.length < app.locals.minPasswordLen) { errorList.push(`Min length: ${app.locals.minPasswordLen}, Max length: ${app.locals.maxPasswordLen}`); }
+    if (plainTextPassword.length > app.locals.maxPasswordLen) { errorList.push(`Min length: ${app.locals.minPasswordLen}, Max length: ${app.locals.maxPasswordLen}`); }
     
     if (app.locals.special === true) {
-        if (await assertStringContains_specialchar(plainTextPassword) == false) { errorList.push("Password must contain a special char"); }
+        if (await assertStringContains_specialchar(plainTextPassword) == false) { errorList.push("Password must contain special char"); }
     }
 
     if (app.locals.lower === true) {
-        if (await assertStringContains_lowercase(plainTextPassword) == false) { errorList.push("Password must contains a lowecase char"); }
+        if (await assertStringContains_lowercase(plainTextPassword) == false) { errorList.push("Password must contains lowecase char"); }
     }
 
     if (app.locals.upper === true) { 
-        if (await assertStringContains_uppercase(plainTextPassword) == false) { errorList.push("Password must contain a uppercase char"); }
+        if (await assertStringContains_uppercase(plainTextPassword) == false) { errorList.push("Password must contain uppercase char"); }
     }
 
     if (app.locals.number === true) { 
-        if (await assertStringContains_number(plainTextPassword) == false) { errorList.push("Password must contain a number"); }
+        if (await assertStringContains_number(plainTextPassword) == false) { errorList.push("Password must contain number"); }
     }
     if (errorList.length > 0) {
         return errorList;
@@ -97,22 +97,22 @@ const assertStringContains = async (text, chars) => {
 // check if string contains special chars
 const assertStringContains_specialchar = async (text) =>
 {
-    return await assertStringContains(text, rulesConfig.specialChars)
+    return await assertStringContains(text, app.locals.specialChars)
 }
 
 // check if string contains at leist 1 upper case char
 const assertStringContains_uppercase = async (text) => {
-    return await assertStringContains(text, rulesConfig.upperChars)
+    return await assertStringContains(text, app.locals.upperChars)
 }
 
 // check if string contains at leist 1 upper case char
 const assertStringContains_lowercase = async (text) => {
-    return await assertStringContains(text, rulesConfig.lowerChars)
+    return await assertStringContains(text, app.locals.lowerChars)
 }
 
 // check if string contains at leist 1 upper case char
 const assertStringContains_number = async (text) => {
-    return await assertStringContains(text, rulesConfig.numberChars)
+    return await assertStringContains(text, app.locals.numberChars)
 }
 
 module.exports =  {
