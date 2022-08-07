@@ -9,7 +9,7 @@ Content-Type: application/json
     "roles": ["user","user_admin"]
 }
 ### GET BY ID
-GET http://localhost:3000/api/get_user_byId?id=62ee8f1b0b34a79c0c236f4f
+GET http://localhost:3000/api/get_user_byId?id=62ef81446d4323bc93672d75
 
 ### Get all
 GET http://localhost:3000/api/get_users_all

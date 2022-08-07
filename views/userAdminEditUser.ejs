@@ -1,3 +1,4 @@
+
 <%- include('./partials/head.ejs') %>
 <link href="/css/flashalert.css" rel="stylesheet">
 
@@ -17,17 +18,10 @@
   
     <br/><br/><br/>
     <h2>Roles</h2>
-    <% for(r=0; r!=roles.length; r++) { %>
+
+
+    <% for(r=0; r != roles.length; r++) { %>
     
-      <% var lock = true %>
-      <% if (roles[r].name === "system" && currentUser.roles.includes("system") === true ) { %> 
-      
-      <% } %>
-  
-      <% if (roles[r].name === "system" && currentUser.roles.includes("system") === false ) {  %>
-      <% } %>
-  
-  
       <%  if (roles[r].name === "system" && currentUser.roles.includes("system") === true ) { %>
         <% if (user.roles.includes(roles[r].name) === true) { %>
           <label><%= roles[r].name %></label>
@@ -38,18 +32,7 @@
           <input type="checkbox" id="role.<%=roles[r].name%>" name="role.<%=roles[r].name%>"><br/>
         <% } %>
       <% } %>
-  
-      <%  if (roles[r].name === "system" && currentUser.roles.includes("system") !== true ) { %>
-        <% if (user.roles.includes(roles[r].name) === true) { %>
-          <label><%= roles[r].name %></label>
-          <input type="checkbox" id="role.<%=roles[r].name%>" name="role.<%=roles[r].name%>" checked="checked" disabled ><br/>
-        <% } %>
-        <% if (user.roles.includes(roles[r].name) === false) { %>
-          <label><%= roles[r].name %></label>
-          <input type="checkbox" id="role.<%=roles[r].name%>" name="role.<%=roles[r].name%>" disabled><br/>
-        <% } %>
-      <% } %>
-  
+ 
       <%  if (roles[r].name !== "system") { %>
         <% if (user.roles.includes(roles[r].name) === true) { %>
           <label><%= roles[r].name %></label>
@@ -58,6 +41,21 @@
         <% if (user.roles.includes(roles[r].name) === false) { %>
           <label><%= roles[r].name %></label>
           <input type="checkbox" id="role.<%=roles[r].name%>" name="role.<%=roles[r].name%>"><br/>
+        <% } %>
+      <% } %>
+
+      <%  if (roles[r].name === "system" && currentUser.roles.includes("system") !== true ) { %>
+        <% if (user.roles.includes(roles[r].name) === true) { %>
+            <div hidden> 
+                <label><%= roles[r].name %></label>
+                <input type="checkbox" id="role.<%=roles[r].name%>" name="role.<%=roles[r].name%>" checked="checked" ><br/>
+            </div>
+        <% } %>
+        <% if (user.roles.includes(roles[r].name) === false) { %>
+            <div hidden>
+                <label><%= roles[r].name %></label>
+                <input type="hidden" id="role.<%=roles[r].name%>" name="role.<%=roles[r].name%>"><br/><br/>
+            </div>
         <% } %>
       <% } %>
   

@@ -20,11 +20,24 @@ async function user_admin_create_post(req, res) {
         // set user
         let user = req.body;
 
-        // compare the ROLE assigned with roles names in DB, then put assigned role into array if they are valid
+         // FIX THE ROLES !
         let newRoles = [];
+        const strReqBody = JSON.stringify(req.body);
 
-        // set role array, compatiable with api
-        user.roles = createUpdateRoleCompare(req, res);
+        // check not trying to hack system admin role
+        if (strReqBody.includes("system") === true && req.user.roles.includes("system") !== true) {
+            return res.render("permissionDenied", {message: "You do not have permission to set [system] role"}); 
+        }
+
+        // Add only assigned roles to the array
+        for(r=0; r!=ROLE.length; r++) {
+            if (strReqBody.includes("role." + ROLE[r].name) === true) {
+                newRoles.push(ROLE[r].name);
+            }
+        }
+        user.roles = newRoles;
+        console.log("FIXED: " + newRoles);
+
 
         // Add user
         const ret = await api.post_user(user)
@@ -57,22 +70,25 @@ async function user_admin_update_post(req, res) {
         // set user
         let user = req.body;
 
+         // FIX THE ROLES !
+         let newRoles = [];
+         const strReqBody = JSON.stringify(req.body);
+         console.log("strReqBody: " + strReqBody);
+ 
+         // check not trying to hack system admin role
+         if (strReqBody.includes("system") === true && req.user.roles.includes("system") !== true) {
+             return res.render("permissionDenied", {message: "You do not have permission to modify a [system] role"}); 
+         }
+         
+         // Add only assigned roles to the array
+         for(r=0; r!=ROLE.length; r++) {
+             if (strReqBody.includes("role." + ROLE[r].name) === true) {
+                 newRoles.push(ROLE[r].name);
+             }
+         }
+         user.roles = newRoles;
+         console.log("FIXED: " + newRoles);
 
-        //TODO: Find a way to check validation input before we try to save and return an error!
-        // check input
-        // const inputValResult = passwordController.validateUserInput(user);
-        // if (inputValResult !== null ){
-        //     const errRet = user;
-        //     errRet.errList = inputValResult
-        //     return res.render("userAdminEditUser", {user: user, returnData: errRet, roles: ROLE, currentUser: req.user});
-        // }
-        //console.log("RESULT: " + inputValResult);
-        //return res.send("ERROR: " + inputValResult.errList);
-
-      
-
-        // compare the ROLE assigned with roles names in DB, then put assigned role into array if they are valid
-        user.roles = createUpdateRoleCompare(req, res);
 
         // TODO: add code here to check that ID has not been tampred with.
         // Update user, TODO: add code here to handle updated password
@@ -109,7 +125,7 @@ async function user_admin_update_post(req, res) {
 }
 
 // compare the ROLE assigned with roles names in DB, then put assigned role into array if they are valid
-function createUpdateRoleCompare(req, res){
+async function createUpdateRoleCompare(req, res){
 
     let newRoles = [];
     strReqBody = JSON.stringify(req.body);
@@ -118,6 +134,18 @@ function createUpdateRoleCompare(req, res){
     if (strReqBody.includes("system") === true && req.user.roles.includes("system") !== true) {
         return res.render("permissionDenied", {message: "You do not have permission to set [system] role"}); 
     }
+        // check if the target user does not already have system role
+        // we need to do this so we dont accitandnly set back the systenm role as un-checked
+        // if it was previously checked.
+        
+        //return res.render("permissionDenied", {message: "You do not have permission to set [system] role"}); 
+
+        // const targetUser = await api.get_user_byId(req.body.id);
+        // console.log("TARGET: " + targetUser);
+        // if (targetUser.roles.includes("system") === false) {
+           
+        // }
+   
 
     // compare sent req.body.role name is valid with config
     for(r=0; r!=ROLE.length; r++) {

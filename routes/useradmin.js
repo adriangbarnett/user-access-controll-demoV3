@@ -6,8 +6,16 @@ passportController = require("../controllers/passport.js");
 useradminPageController = require("../controllers/useradmin.page.js");
 permissionController = require("../controllers/permission.js");
 
-// User Admin
+user = require("../controllers/user2.page.js");
 
+
+// NEW
+// // router.get("/createUser", passportController.isAuth, permissionController.authPerm(["user_admin_create"]), user.createUser_get);
+// // router.post("/createUser", passportController.isAuth, permissionController.authPerm(["user_admin_create"]), user.createUser_post);
+
+
+
+// OLD
 // Create
 router.get("/user_admin_create_get", passportController.isAuth, permissionController.authPerm(["user_admin_create"]), useradminPageController.user_admin_create_get);
 router.post("/user_admin_create_post", passportController.isAuth, permissionController.authPerm(["user_admin_create"]), useradminPageController.user_admin_create_post);

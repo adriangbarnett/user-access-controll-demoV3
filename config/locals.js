@@ -1,4 +1,6 @@
 // Set locals
+const { ROLE  } = require("./roles.js");
+const { PERMISSION  } = require("./permissions.js");
 
 function init() {
 
@@ -8,6 +10,8 @@ function init() {
         return new Date().getFullYear();
     }
 
+    app.locals.ROLE = ROLE;
+    app.locals.PERMISSION = PERMISSION;
     app.locals.minUsernameLen = 1;
     app.locals.maxUsernameLen = 10;
     app.locals.minEmailLen = 1;
@@ -25,6 +29,15 @@ function init() {
     app.locals.testAttr = "testValue1";
 
     app.locals.myLocalValue1 = "Local1";
+
+    // create a list of roles on html form based on user details
+    app.locals.validateUserInput = (dataToValidate) => {
+
+    
+        return true;
+    }
+
+
 }
 
 module.exports =  {
